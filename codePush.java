@@ -1,3 +1,24 @@
+-------------------------------------------------------------------------------------------
+    I am building an application to store customer personal details using a Micro Frontend (MFE) architecture, where the MFE runs inside a host container. The architecture consists of:
+
+Frontend / MFE (hosted inside a container)
+BFF (Backend-for-Frontend)
+DAPI (Domain API)
+
+Key Requirements & Workflow:
+
+Maker-Checker Flow: When an update request originates from the frontend, it should not update the main database directly. Instead, it should modify a temporary database (or staging table) and remain pending in a checker queue. The changes will only be committed to the main database once approved by a checker.
+Internal Consumers: Customer details stored in this system will be consumed by around 7 to 8 internal applications within my organization. These consumer services will only have read access via GET endpoints on the Domain API.
+Zero Trust Security (mTLS): To implement a Zero Trust security model, I want to use Mutual TLS (mTLS) for secure service-to-service communication.
+Reusable Framework: I want to build a reusable mTLS library/starter module in Java Spring Boot that will be published to our organization’s internal JFrog repository.
+Developer Experience: Integrating this framework into any Spring Boot service should be effortless—requiring only a dependency inclusion, a few configuration properties in application.yaml, and minimal code changes.
+
+Please provide a detailed architectural blueprint and Java Spring Boot code implementation to achieve this modular, reusable mTLS framework and workflow.
+
+----------------------------------------------------------------------------------------------------------
+
+
+
 Yes. Below is a complete reference implementation you can turn into an internal JFrog-hosted Spring Boot starter.
 
 I am targeting Java 21 + Spring Boot 4.1.1 here because that is the current stable Spring Boot line in the official documentation. Spring Boot 4.1.1 requires Java 17+, so Java 21 is fully suitable.
